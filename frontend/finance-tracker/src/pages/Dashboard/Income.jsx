@@ -121,7 +121,12 @@ const Income = () => {
   useEffect(() => {
     fetchIncomeDetails();
 
-    return () => { };
+    // Polling for real-time updates every 30 seconds
+    const interval = setInterval(() => {
+      fetchIncomeDetails();
+    }, 30000);
+
+    return () => clearInterval(interval);
   }, [fetchIncomeDetails]);
 
   const addIncomeFooter = (

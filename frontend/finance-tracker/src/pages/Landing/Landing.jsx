@@ -205,7 +205,7 @@ const Landing = () => {
             <footer className="border-t border-gray-200 py-8 md:py-12">
                 <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
                     <div className="flex items-center gap-2">
-                        <img src={finbugLogo} alt="FinBug" className="w-8 h-8" />
+                        <img src={finbugLogo} alt="FinBug" className="w-8 h-8" loading="lazy" />
                         <span className="font-semibold">FinBug</span>
                     </div>
                     <p className="text-sm text-gray-500">© 2025 FinBug. Made with care.</p>

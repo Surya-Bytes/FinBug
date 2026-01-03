@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InfoCard = ({ icon, label, value, color, index = 0 }) => {
+const InfoCard = React.memo(({ icon, label, value, color, index = 0 }) => {
   return (
     <div
       className='bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 flex gap-3 sm:gap-4 items-center transition-all duration-200 hover:shadow-lg hover:border-purple-200 hover:-translate-y-1 cursor-pointer'
@@ -19,6 +19,8 @@ const InfoCard = ({ icon, label, value, color, index = 0 }) => {
       </div>
     </div>
   )
-}
+})
+
+InfoCard.displayName = 'InfoCard'
 
 export default InfoCard

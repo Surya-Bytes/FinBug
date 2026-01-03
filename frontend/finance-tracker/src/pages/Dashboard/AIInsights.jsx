@@ -46,6 +46,13 @@ const AIInsights = ({ onRefresh }) => {
 
   useEffect(() => {
     fetchAIAnalysis();
+
+    // Polling for real-time updates every 60 seconds
+    const interval = setInterval(() => {
+      fetchAIAnalysis();
+    }, 60000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleRefresh = () => {

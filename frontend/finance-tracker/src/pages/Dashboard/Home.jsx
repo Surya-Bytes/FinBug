@@ -45,6 +45,13 @@ const Home = () => {
 
   useEffect(() => {
     fetchDashboardData();
+
+    // Polling for real-time updates every 30 seconds
+    const interval = setInterval(() => {
+      fetchDashboardData();
+    }, 30000);
+
+    return () => clearInterval(interval);
   }, [fetchDashboardData]);
 
   return (

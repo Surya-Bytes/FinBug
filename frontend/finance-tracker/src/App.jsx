@@ -17,6 +17,7 @@ const Home = lazy(() => import("./pages/Dashboard/Home"));
 const Income = lazy(() => import("./pages/Dashboard/Income"));
 const Expense = lazy(() => import("./pages/Dashboard/Expense"));
 const AIInsights = lazy(() => import("./pages/Dashboard/AIInsights"));
+>>>>>>> 54905f0c888a158997124ecc8080923b1afac07a
 
 const App = () => {
   return (
