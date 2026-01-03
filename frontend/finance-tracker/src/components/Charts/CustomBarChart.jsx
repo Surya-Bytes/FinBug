@@ -55,6 +55,13 @@ const formatYAxisValue = (value) => {
   return `₹${value}`;
 };
 
+// Truncate long labels for horizontal display - more aggressive truncation
+const truncateLabel = (label, maxLength = 12) => {
+  if (!label) return "";
+  if (label.length <= maxLength) return label;
+  return label.substring(0, maxLength - 3) + "...";
+};
+
 const CustomBarChart = React.memo(({ data = [], colors }) => {
   // Memoize color function
   const getBarColor = useMemo(() => {

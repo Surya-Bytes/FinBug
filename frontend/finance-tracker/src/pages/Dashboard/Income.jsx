@@ -15,6 +15,7 @@ const Income = () => {
   useUserAuth();
 
   const [incomeData, setIncomeData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const fetchingRef = useRef(false);
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
   const addButtonRef = useRef(null);
@@ -25,6 +26,7 @@ const Income = () => {
     if (fetchingRef.current) return;
 
     fetchingRef.current = true;
+    setLoading(true);
 
     try {
       const response = await axiosInstance.get(API_PATHS.INCOME.GET_ALL_INCOME);
@@ -35,6 +37,7 @@ const Income = () => {
     } catch (error) {
       console.log("Something went wrong. Please try again.", error);
     } finally {
+      setLoading(false);
       fetchingRef.current = false;
     }
   }, []);
@@ -121,12 +124,7 @@ const Income = () => {
   useEffect(() => {
     fetchIncomeDetails();
 
-    // Polling for real-time updates every 30 seconds
-    const interval = setInterval(() => {
-      fetchIncomeDetails();
-    }, 30000);
-
-    return () => clearInterval(interval);
+    return () => { };
   }, [fetchIncomeDetails]);
 
   const addIncomeFooter = (

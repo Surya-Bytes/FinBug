@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef } from 'react'
 import finbugLogo from '../../assets/finbug.png'
 import heroVideo from '../../assets/videos/video.mp4'
 import { useNavigate } from 'react-router-dom'
@@ -8,28 +8,6 @@ import '../../index.css'
 const Landing = () => {
     const navigate = useNavigate();
     const contactRef = useRef(null);
-    const videoRef = useRef(null);
-    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setIsVideoLoaded(true);
-                        observer.disconnect();
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
-
-        if (videoRef.current) {
-            observer.observe(videoRef.current);
-        }
-
-        return () => observer.disconnect();
-    }, []);
 
     const handleContactSubmit = async (e) => {
         e.preventDefault();
@@ -47,7 +25,7 @@ const Landing = () => {
             } else {
                 toast.error('Failed to send. Please try again.', { id: loadingToast });
             }
-        } catch {
+        } catch (error) {
             toast.error('Something went wrong.', { id: loadingToast });
         }
     }
@@ -88,14 +66,10 @@ const Landing = () => {
                     </div>
 
                     <div className="relative">
-                        <div ref={videoRef} className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
-                            {isVideoLoaded ? (
-                                <video src={heroVideo} poster={finbugLogo} className="w-full h-full object-cover" autoPlay loop muted playsInline>
-                                    <img src={finbugLogo} alt="FinBug Demo" className="w-full h-full object-cover" />
-                                </video>
-                            ) : (
+                        <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
+                            <video src={heroVideo} poster={finbugLogo} className="w-full h-full object-cover" autoPlay loop muted playsInline>
                                 <img src={finbugLogo} alt="FinBug Demo" className="w-full h-full object-cover" />
-                            )}
+                            </video>
                         </div>
                     </div>
                 </div>
@@ -205,7 +179,7 @@ const Landing = () => {
             <footer className="border-t border-gray-200 py-8 md:py-12">
                 <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
                     <div className="flex items-center gap-2">
-                        <img src={finbugLogo} alt="FinBug" className="w-8 h-8" loading="lazy" />
+                        <img src={finbugLogo} alt="FinBug" className="w-8 h-8" />
                         <span className="font-semibold">FinBug</span>
                     </div>
                     <p className="text-sm text-gray-500">© 2025 FinBug. Made with care.</p>

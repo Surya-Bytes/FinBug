@@ -1,5 +1,5 @@
 import moment from 'moment'
-import React, { useCallback, useState, useRef } from 'react'
+import React, { useMemo, useCallback, useState, useRef } from 'react'
 import { LuDownload } from 'react-icons/lu'
 import TransactionInfoCard from '../Cards/TransactionInfoCard'
 import DeleteConfirmPopover from '../layouts/DeleteConfirmPopover'

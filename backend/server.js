@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const compression = require('compression');
 const path = require('path');
 const connectDB = require('./config/db');
 const authRoutes = require("./routes/authRoutes");
@@ -12,8 +11,6 @@ const aiRoutes = require("./routes/aiRoutes");
 const billScanRoutes = require("./routes/billScanRoutes");
 
 const app = express();
-
-app.use(compression()); // Enable gzip compression
 
 app.use(cors({
   origin: process.env.CLIENT_URL || "*",
@@ -34,19 +31,9 @@ app.use("/api/v1/ai", aiRoutes);
 app.use("/api/v1/bill", billScanRoutes);
 
 // Server uploads folder
-app.use("/uploads", express.static(path.join(__dirname, "uploads"), {
-  maxAge: '1d', // Cache for 1 day
-  etag: true
-}));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const PORT = process.env.PORT || 5000;
-
-// For local development
-if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-}
-
-// Export for Vercel
-module.exports = app;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

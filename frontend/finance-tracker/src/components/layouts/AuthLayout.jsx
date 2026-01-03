@@ -8,7 +8,7 @@ const AuthLayout = ({ children, showRight = true }) => {
     <div className="min-h-screen flex bg-white">
       <div className="w-full md:w-[60vw] px-6 md:px-12 py-8 flex flex-col">
         <Link to="/" className="flex items-center gap-2 mb-12">
-          <img src={finbugLogo} alt="FinBug" className="w-10 h-10" loading="lazy" />
+          <img src={finbugLogo} alt="FinBug" className="w-10 h-10" />
           <span className="text-xl font-semibold">FinBug</span>
         </Link>
         {children}

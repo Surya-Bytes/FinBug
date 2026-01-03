@@ -12,7 +12,6 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "axios": "^1.12.2",
-    "compression": "^1.8.1",
     "emoji-picker-react": "^4.13.3",
     "moment": "^2.30.1",
     "react": "^19.1.1",
@@ -32,7 +31,6 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.4.0",
-    "vite": "^7.1.7",
-    "vite-plugin-pwa": "^1.2.0"
+    "vite": "^7.1.7"
   }
 }
