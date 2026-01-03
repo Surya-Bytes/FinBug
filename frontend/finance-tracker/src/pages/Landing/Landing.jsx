@@ -67,7 +67,7 @@ const Landing = () => {
 
                     <div className="relative">
                         <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
-                            <video src={heroVideo} poster={finbugLogo} className="w-full h-full object-cover" autoPlay loop muted playsInline>
+                            <video src={heroVideo} className="w-full h-full object-cover" autoPlay loop muted playsInline>
                                 <img src={finbugLogo} alt="FinBug Demo" className="w-full h-full object-cover" />
                             </video>
                         </div>
