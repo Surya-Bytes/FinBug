@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import moment from "moment";
 import CustomBarChart from "../Charts/CustomBarChart";
 
 const Last30DaysExpenses = React.memo(({ data }) => {

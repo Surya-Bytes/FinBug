@@ -1,4 +1,4 @@
-export const BASE_URL = import.meta.env.VITE_BASE_URL || "https://fin-bug.vercel.app";
+export const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8000";
 
 //utils/apiPaths.js
 export const API_PATHS = {

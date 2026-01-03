@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import finbugLogo from '../../assets/finbug.png'
 import heroVideo from '../../assets/videos/video.mp4'
 import { useNavigate } from 'react-router-dom'
@@ -8,6 +8,28 @@ import '../../index.css'
 const Landing = () => {
     const navigate = useNavigate();
     const contactRef = useRef(null);
+    const videoRef = useRef(null);
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setIsVideoLoaded(true);
+                        observer.disconnect();
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        if (videoRef.current) {
+            observer.observe(videoRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
 
     const handleContactSubmit = async (e) => {
         e.preventDefault();
@@ -25,7 +47,7 @@ const Landing = () => {
             } else {
                 toast.error('Failed to send. Please try again.', { id: loadingToast });
             }
-        } catch (error) {
+        } catch {
             toast.error('Something went wrong.', { id: loadingToast });
         }
     }
@@ -66,10 +88,14 @@ const Landing = () => {
                     </div>
 
                     <div className="relative">
-                        <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
-                            <video src={heroVideo} poster={finbugLogo} className="w-full h-full object-cover" autoPlay loop muted playsInline>
+                        <div ref={videoRef} className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
+                            {isVideoLoaded ? (
+                                <video src={heroVideo} poster={finbugLogo} className="w-full h-full object-cover" autoPlay loop muted playsInline>
+                                    <img src={finbugLogo} alt="FinBug Demo" className="w-full h-full object-cover" />
+                                </video>
+                            ) : (
                                 <img src={finbugLogo} alt="FinBug Demo" className="w-full h-full object-cover" />
-                            </video>
+                            )}
                         </div>
                     </div>
                 </div>

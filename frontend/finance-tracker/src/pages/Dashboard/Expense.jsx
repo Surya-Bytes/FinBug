@@ -15,7 +15,6 @@ const Expense = () => {
   useUserAuth();
 
   const [expenseData, setExpenseData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const fetchingRef = useRef(false);
   const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false);
   const addButtonRef = useRef(null);
@@ -26,7 +25,6 @@ const Expense = () => {
     if (fetchingRef.current) return;
 
     fetchingRef.current = true;
-    setLoading(true);
 
     try {
       const response = await axiosInstance.get(
@@ -39,7 +37,6 @@ const Expense = () => {
     } catch (error) {
       console.log("Something went wrong. Please try again.", error);
     } finally {
-      setLoading(false);
       fetchingRef.current = false;
     }
   }, []);
