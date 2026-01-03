@@ -1,0 +1,529 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Poppins", "sans-serif";
+  --breakpoint-3xl: 1920px;
+  --color-primary: #875cf5;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-display);
+  }
+
+  body {
+    background-color: #fcfbfc;
+    overflow-x: hidden;
+  }
+
+  /* Performance optimizations for smoother animations */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Enable hardware acceleration for transforms */
+  .card,
+  .card-btn,
+  .add-btn,
+  .side-menu-btn,
+  .contact-btn,
+  .outlined-btn {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+}
+
+.input-box {
+  @apply w-full flex justify-between gap-3 text-sm text-black bg-slate-100 rounded px-4 py-3 mb-4 mt-3 border border-slate-200 outline-none;
+  transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-box:focus-within {
+  @apply ring-2 ring-purple-200 border-purple-300 bg-white;
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  @apply w-full text-sm font-medium text-white bg-violet-500 shadow-lg shadow-purple-600/5 p-[10px] rounded-md my-1 hover:bg-purple-600/15 hover:text-purple-600;
+}
+
+.card {
+  @apply bg-white rounded-2xl p-6 shadow-sm shadow-gray-100/50 border border-gray-100/80;
+  /* smooth animations */
+  transition: all 140ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 250ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  backdrop-filter: blur(10px);
+  will-change: transform, box-shadow;
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.005);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(135, 92, 245, 0.15);
+  border-color: rgba(135, 92, 245, 0.25);
+}
+
+.card-btn {
+  @apply flex items-center gap-3 text-[12px] font-medium text-gray-700 bg-gray-50 px-4 py-1.5 rounded-lg border border-gray-200/50 cursor-pointer;
+  transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.card-btn:hover {
+  @apply text-purple-600 bg-purple-50;
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(135, 92, 245, 0.18);
+  border-color: rgba(135, 92, 245, 0.35);
+}
+
+.card-btn:active {
+  transform: translateY(0) scale(1);
+  transition: all 60ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.add-btn {
+  @apply flex items-center gap-1.5 text-xs md:text-sm font-medium text-purple-600 whitespace-nowrap bg-purple-50 border border-purple-100 rounded-lg px-4 py-2 cursor-pointer;
+  transition: all 120ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  will-change: transform, box-shadow;
+}
+
+.add-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(135, 92, 245, 0.12);
+  transform: translate(-50%, -50%);
+  transition: width 200ms cubic-bezier(0.4, 0, 0.2, 1), height 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.add-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.add-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(135, 92, 245, 0.22);
+  border-color: rgba(135, 92, 245, 0.35);
+}
+
+.add-btn:active {
+  transform: translateY(0) scale(1);
+  transition: all 60ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.add-btn-fill {
+  @apply text-white bg-primary;
+  transition: all 120ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.add-btn-fill:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(135, 92, 245, 0.25);
+}
+
+.add-btn-fill:active {
+  transform: translateY(0) scale(1);
+  transition: all 60ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Side menu button smoother hover */
+.side-menu-btn {
+  @apply w-full flex items-center gap-4 text-[15px] py-3 px-6 rounded-lg mb-3;
+  transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.side-menu-btn:hover {
+  @apply bg-purple-50 text-purple-600;
+  transform: translateX(6px);
+}
+
+.side-menu-btn:active {
+  transform: translateX(3px);
+  transition: all 60ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Landing page specific styles */
+.bg-landing-gradient {
+  background: linear-gradient(180deg,
+      rgba(255, 241, 244, 0.9) 0%,
+      rgba(235, 229, 255, 0.9) 50%,
+      rgba(241, 255, 236, 0.9) 100%);
+}
+
+.landing-root {
+  min-height: 100vh;
+}
+
+.landing-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact-btn {
+  transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.contact-btn:active {
+  transform: translateY(0) scale(1);
+  transition: all 60ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.outlined-btn {
+  transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.outlined-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08);
+}
+
+.outlined-btn:active {
+  transform: translateY(0) scale(1);
+  transition: all 60ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.illu-container {
+  background: linear-gradient(180deg,
+      rgba(255, 230, 236, 0.6),
+      rgba(220, 215, 255, 0.6));
+  /* remove inner padding so media fills the rounded container edge-to-edge */
+  padding: 0;
+}
+
+/* ensure media inside the illustration fills the container and covers any aspect ratio differences */
+.illu-container video,
+.illu-container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Modern Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Page transitions - Optimized for speed */
+.transition-page {
+  animation: fadeInUp 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 150ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 180ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.animate-slide-down {
+  animation: slideDown 150ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-slide-up {
+  animation: slideUp 220ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Stagger animations - Faster delays */
+.animate-delay-100 {
+  animation-delay: 50ms;
+}
+
+.animate-delay-200 {
+  animation-delay: 100ms;
+}
+
+.animate-delay-300 {
+  animation-delay: 150ms;
+}
+
+.animate-delay-400 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-500 {
+  animation-delay: 250ms;
+}
+
+/* Smooth hover effects for interactive elements */
+button,
+a,
+.cursor-pointer {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Optimize chart animations */
+.recharts-wrapper {
+  transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+/* Smooth scroll behavior - Faster */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-padding-top: 80px;
+  }
+}
+
+/* Enhanced focus states */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(135, 92, 245, 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Pulse animation for emphasis */
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Shimmer effect for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.5) 60%,
+      rgba(255, 255, 255, 0));
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Bounce animation for icons */
+@keyframes bounce-subtle {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.hover-bounce:hover {
+  animation: bounce-subtle 0.6s ease-in-out;
+}
+
+/* responsive tweak: stack hero and illustration on small screens */
+@media (max-width: 768px) {
+  .illu-container {
+    padding: 0;
+  }
+
+  .landing-root h2 {
+    text-align: center;
+  }
+
+  .landing-root p {
+    text-align: center;
+  }
+}
+
+/* Developed and Contact sections styling */
+.developed-by-section .card,
+.contact-section .card {
+  background: white;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.04);
+}
+
+/* Add a small top offset when scrolling into view for sticky nav */
+@supports (scroll-margin-top: 1px) {
+
+  .developed-by-section,
+  .contact-section {
+    scroll-margin-top: 90px;
+  }
+}
+
+/* 
+Mobile Emoji Picker Centering */
+@media (max-width: 639px) {
+  .emoji-picker-mobile {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: calc(100vw - 32px) !important;
+    max-width: 350px !important;
+  }
+
+  .emoji-picker-mobile .relative {
+    width: 100% !important;
+  }
+
+  .emoji-picker-mobile .max-h-\[400px\] {
+    max-height: 60vh !important;
+  }
+}
+
+/* Mobile Emoji Picker Backdrop */
+.emoji-picker-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  animation: fadeIn 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 640px) {
+  .emoji-picker-backdrop {
+    display: none;
+  }
+}
+
+/*
+ Emoji Picker Performance Optimizations */
+.emoji-picker-mobile {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.emoji-picker-mobile .relative {
+  transform: translateZ(0);
+}
+
+/* Smooth scrolling for emoji picker */
+.emoji-picker-mobile .overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
