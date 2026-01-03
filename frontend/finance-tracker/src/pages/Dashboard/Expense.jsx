@@ -128,7 +128,12 @@ const Expense = () => {
   useEffect(() => {
     fetchExpenseDetails();
 
-    return () => { };
+    // Polling for real-time updates every 30 seconds
+    const interval = setInterval(() => {
+      fetchExpenseDetails();
+    }, 30000);
+
+    return () => clearInterval(interval);
   }, [fetchExpenseDetails]);
 
   const addExpenseFooter = (
